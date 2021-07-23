@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const catchAsync = require("../utils/catchAsync")
-//const ExpressError = require("../utils/ExpressError")
 const Campground = require("../models/campground")
-//const { campgroundSchema, reviewSchema } = require("../schemas.js")
 const Review = require("../models/review")
 const {isLoggedIn, isAuthor, validateCampground} = require("../middleware")
 const campgrounds = require("../controllers/campgrounds")
@@ -15,7 +13,6 @@ const upload = multer({storage})
 
 router.route("/")
 .get(catchAsync(campgrounds.index))
- //.post(isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground  )) 
  .post(isLoggedIn, upload.array('image'), validateCampground,  catchAsync(campgrounds.createCampground))
 
  router.get("/new", isLoggedIn, (req, res,) => {

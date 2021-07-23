@@ -1,9 +1,4 @@
-
-
-//problem: database is not connected to mongo atlas
-
 require("dotenv").config();
-
 
 const express = require("express")
 const path = require("path");
@@ -26,7 +21,6 @@ const MongoDBStore = require("connect-mongo").default;
 const { default: MongoStore } = require("connect-mongo");
 
 
-//mongodb://localhost:27017/yelp-camp
 mongoose.connect(dbUrl, {
 useNewUrlParser: true,
 useCreateIndex: true,
