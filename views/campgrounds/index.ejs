@@ -39,10 +39,7 @@
 const mapToken = "<%-process.env.MAPBOX_TOKEN%>"
 const campgrounds = { features: <%-JSON.stringify(campgrounds)%> }
 
-const preloader = document.querySelector(".preloader")
-    window.addEventListener("load", () => {
-      preloader.classList.add("preloader-done")
-    })
+
    </script>
    
 <script defer src="/javascripts/clustermap.js"></script>
