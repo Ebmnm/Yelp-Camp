@@ -8,11 +8,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
     integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <script defer src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
     <link rel="stylesheet" href="/stylesheets/app.css">
+    <style>
+        .preloader{
+          display:block;
+          margin: auto;
+          margin-left:15%;
+          position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: wheat;
+        }
+        .preloader-done{
+          display:none;
+        
+        }
+       </style>
 </head>
 <body class="d-flex flex-column vh-100">
+    <div class="preloader"> 
+        <h2>Loading Campgrounds</h2>
+        <img src="data:image/png;base64,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" alt="">
+      </div>
     <%- include("../partials/navbar") %> 
     <main class="container mt-5">
       <%- include("../partials/flash") %> 
@@ -23,6 +45,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     
     <script src="/javascripts/validateforms.js"> </script>
+    <script>
+        const preloader = document.querySelector(".preloader")
+            window.addEventListener("load", () => {
+              preloader.classList.add("preloader-done")
+            })
+             </script>
     
 
 </body>
